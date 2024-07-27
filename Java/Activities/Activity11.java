@@ -14,6 +14,7 @@ public class Activity11 {
 		System.out.println("Current set: " + colour);
 
 		colour.remove(4, "Black");
+		System.out.println("Current Size of set: " + colour.size());
 		System.out.println("Updated set: " + colour);
 
 		if (colour.containsValue("Purple")) {
@@ -21,6 +22,8 @@ public class Activity11 {
 		} else {
 			System.out.println("Purple colour is not present in the set");
 		}
+		
+		System.out.println("Current Size of set: " + colour.size());
 
 	}
 
