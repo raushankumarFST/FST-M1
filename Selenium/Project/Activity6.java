@@ -1,0 +1,66 @@
+package projectSelenium;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Activity6 {
+	WebDriver driver;
+
+	@BeforeTest(alwaysRun = true)
+	public void beforeMethod() {
+
+		WebDriverManager.firefoxdriver().setup();
+		driver = new FirefoxDriver();
+
+		driver.get("https://alchemy.hguy.co/lms");
+	}
+
+	@Test
+	public void HeaderTest3() {
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		driver.findElement(By.xpath("//*[@id=\"menu-item-1507\"]")).click();
+
+		WebElement page_title = driver.findElement(By.cssSelector("h1.uagb-ifb-title"));
+		Assert.assertEquals(page_title.getText(), "My Account");
+		System.out.println("On Page: " + page_title.getText());
+
+		driver.findElement(By.cssSelector("a.ld-login")).click();
+
+		WebElement dynamicBox = driver.findElement(By.cssSelector("div.ld-login-modal-login"));
+		wait.until(ExpectedConditions.visibilityOf(dynamicBox));
+		System.out.println(dynamicBox.isDisplayed());
+	}
+
+	@Test
+	public void loginTest() {
+		WebElement username = driver.findElement(By.id("user_login"));
+		WebElement password = driver.findElement(By.id("user_pass"));
+
+		username.sendKeys("root");
+		password.sendKeys("pa$$w0rd");
+
+		driver.findElement(By.xpath("//input[@id='wp-submit']")).click();
+
+		driver.findElement(By.cssSelector("img.avatar-96"));
+		System.out.println("Logged In Successful");
+
+	}
+
+	@AfterTest(alwaysRun = true)
+	public void afterMethod() {
+
+		driver.close();
+	}
+}
