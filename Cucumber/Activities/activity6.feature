@@ -1,8 +1,18 @@
 @activity6
-Feature: Basic Syntax
+Feature: Parameterization with DataTable
 
-Scenario: Opening a webpage using Selenium
-    Given User is on Google Home Page
-    When User types in Cheese and hits ENTER
-    Then Show how many search results were shown
-    And Close the browser
+Scenario: Testing with Data from Scenario
+  Given User completes the requirement
+  When User enters the following username and password
+    | admin     | password |
+    | adminUser | Password |
+    | adminUser |          |
+  Then Verify results
+
+Scenario: Testing the To-Do app
+  Given User completes the requirement
+  When User enters the following tasks
+    | task1 |
+    | task2 |
+    | task3 |
+  Then Verify results
